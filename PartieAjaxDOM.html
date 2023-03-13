@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX</title>
+  <script src="source.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="content">
+    <input type="button" value="Bouton 1" id="bouton1" onclick="button1()">
+    <input type="button" value="Bouton 2" id="bouton2" onclick="button2()">
+    <input type="text" id="countryCode" list = "countryList">
+    <datalist id="countryList">
+
+    </datalist>
+    <input type="button" value="Bouton 3" id="bouton3" onclick="button3('./countriesTP.xml', './cherchePays.xsl')">
+    <p id="countryInfo"></p>
+    <input type="button" value="Bouton 4" id="bouton4" onclick="button4('exemple.svg')">
+    <div id="image"></div>
+    <input type="button" value="Bouton 5" id="bouton5" onclick="button5()">
+    <p id="title"></p>
+    <input type="button" value="Bouton 6" id="bouton6" onclick="button6('worldHigh.svg')">
+    <div id="table"></div>
+    <div id="map"></div>
+    <input type="button" value="Bouton 7" id="bouton7" onclick="button7()">
+    <p id="countryName"></p>
+    <input type="button" value="Bouton 8" id="bouton8" onclick="button8('countriesTP.xml', 'getInfoPays.xsl')">
+    <input type="button" value="Bouton 9" id="bouton9" onclick="button9('countriesTP.xml')">
+    <input type="button" value="Bouton 10" id="bouton10" onclick="button10()">
+    <input type="button" value="Bouton 11" id="bouton11" onclick="button11('countriesTP.xml', 'memeLangue.xsl')">
+    <input type="button" value="Bouton 12" id="bouton12" onclick="button12()">
+    <p id="trivia"></p>
+  </div>
+</body>
+</html>

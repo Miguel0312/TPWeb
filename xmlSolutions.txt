@@ -1,0 +1,31 @@
+/countries/country/country_name/offic_name
+
+/countries/country/coordinates/@lat
+
+/countries/country/@area
+
+/countries/country[infosContinent/continent = "Europe"]/country_name/offic_name
+
+/countries/country/country_name[count(native_name) = 0]/common_name
+
+/countries/country/country_name/native_name[@lang="fra"]/offic_name
+
+//.[count(@*)>0]
+
+/countries/country/country_name/native_name[position()=2]/offic_name
+
+sum(/countries/country[infosContinent/continent = "Africa"]/@area)
+
+/countries/country/country_name[not(contains(offic_name, common_name))]/offic_name
+
+/countries/country[country_name/common_name="France"]/borders/neighbour[last()]
+
+count(/countries/country[country_name/common_name="France"]/preceding-sibling::*)+1
+
+DTD
+
+/countries/country[count(borders)=0]
+
+<!ELEMENT country (country_name,tld*,country_codes,currency*,callingCode*,
+                   capital,altSpellings+, infosContinent,languages,
+                   coordinates?,demonym,landlocked,borders?)>
