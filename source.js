@@ -225,6 +225,12 @@ function button11(xmlDocumentUrl, xslDocumentUrl){
   for(let e of elements){
     codes.push(e.innerHTML);
   }
+
+
+  // Reset the style
+  for(let country of countries){
+    country.style = "";
+  }
   
   for(let country of countries){
     for(let c of codes)
@@ -265,4 +271,29 @@ function button12(){
 
   var trivia = document.getElementById("trivia");
   trivia.innerHTML = countryName;
+}
+
+function button13(){
+  var city = document.getElementById("cityName").value;
+  var baseUrlCity = "https://geocoding-api.open-meteo.com/v1/search?name=";
+  var cityData = chargerHttpJSON(baseUrlCity+city);
+  var lat = cityData.results[0].latitude, lng = cityData.results[0].longitude;
+
+  var baseUrlForecast = "https://api.open-meteo.com/v1/forecast?";
+  var forecastData = chargerHttpJSON(baseUrlForecast+"latitude="+lat+"&longitude="+lng+"&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto");
+  var maximumTemperature = forecastData.daily.temperature_2m_max[0];
+  var minimumTemperature = forecastData.daily.temperature_2m_min[0];
+  var precipitationProbability = forecastData.daily.precipitation_probability_max[0];
+  console.log(maximumTemperature);
+
+  var title = document.getElementById("forecastTitle");
+  var maxTmp = document.getElementById("maxTmp");
+  var minTmp = document.getElementById("minTmp");
+  var rainProb = document.getElementById("rainProb");
+
+  title.textContent = "Prévision météorologique pour aujourd'hui à " + city;
+  maxTmp.textContent = "Température maximale: " + maximumTemperature.toString() + "\u00B0C";
+  minTmp.textContent = "Température minimale: " + minimumTemperature.toString() + "\u00B0C";
+  rainProb.textContent = "Probabilité de précipitation: " + precipitationProbability.toString() + "%";
+
 }
