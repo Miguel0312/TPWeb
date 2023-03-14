@@ -1,5 +1,5 @@
 First part
-Step 1:
+Step 1: Exploring the instance [XPath]
 
 1. the official names of the countries:
 /countries/country/country_name/offic_name
@@ -38,7 +38,7 @@ sum(/countries/country[infosContinent/continent = "Africa"]/@area)
 count(/countries/country[country_name/common_name="France"]/preceding-sibling::*)+1
 
 
-Step 2:
+Step 2: Instance update [XML, DTD]
 
 there are 4 types of declared occurrence for child nodes:
 exaclty one occurrence:
