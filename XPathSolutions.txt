@@ -1,0 +1,78 @@
+First part
+Step 1:
+
+1. the official names of the countries:
+/countries/country/country_name/offic_name
+
+2. the latitude of each country
+/countries/country/coordinates/@lat
+
+3. the area of each country
+/countries/country/@area
+
+4. the official names of European countries
+/countries/country[infosContinent/continent = "Europe"]/country_name/offic_name
+
+5. the common names of countries that do not have any native name
+/countries/country/country_name[count(native_name) = 0]/common_name
+
+6. the official names of the countries expressed in French, for those who have such names
+/countries/country/country_name/native_name[@lang="fra"]/offic_name
+
+7. elements with at least one attribute
+//.[count(@*)>0]
+
+8. official names of the second native name of countries (for those who have)
+/countries/country/country_name/native_name[position()=2]/offic_name
+
+9. the sum of the surfaces of the countries of Africa
+sum(/countries/country[infosContinent/continent = "Africa"]/@area)
+
+10. countries whose common name is not contained in their official name
+/countries/country/country_name[not(contains(offic_name, common_name))]/offic_name
+
+11. France's last neighbor
+/countries/country[country_name/common_name="France"]/borders/neighbour[last()]
+
+12. the position of France in the XML document
+count(/countries/country[country_name/common_name="France"]/preceding-sibling::*)+1
+
+
+Step 2:
+
+there are 4 types of declared occurrence for child nodes:
+exaclty one occurrence:
+<!ELEMENT example-elem (example)>
+
+zero or more occurrence:
+<!ELEMENT example-elem (example*)>
+
+zero or one occurrence:
+<!ELEMENT example-elem (example?)>
+
+one or more occurrence:
+<!ELEMENT example-elem (example+)>
+
+
+for each child mark with the * declared occurrence we have to verify that it is the most appropriate type
+if not we need to change to the type that is the most appropriate
+
+the definition of country before we modify it is:
+<!ELEMENT country (country_name,tld*,country_codes,currency*,callingCode*,
+                   capital,altSpellings*, infosContinent*,languages*,
+                   coordinates*,demonym,landlocked,borders*)>
+
+the children we need to verify are: tld, currency, callingCode, altSpellings, infosContinent, languages, coordinates and borders
+
+
+In order to decide which of these type to chose we have to test 2 things on these children of country
+if there is any country that does not have this type of child
+/countries/country[count(tld)=0]
+
+if there is any country that has multiple child of this type
+/countries/country[count(tld)>1]
+
+after running these tests and modify the definition of country accordingly it is:
+<!ELEMENT country (country_name,tld*,country_codes,currency*,callingCode*,
+                   capital,altSpellings+, infosContinent,languages,
+                   coordinates?,demonym,landlocked,borders?)>
